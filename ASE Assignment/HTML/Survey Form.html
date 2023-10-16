@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Survey Form</title>
+	<style>
+		body {
+			background-color: #2196F3;
+		}
+		form {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			width: 50%;
+			margin: 0 auto;
+			font-weight: bold;
+			color: #000;
+		}
+		input[type=text], input[type=email], input[type=tel], select {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		input[type=checkbox] {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		input[type=submit], input[type=reset] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			float: right;
+			margin-left: 10px;
+		}
+		input[type=reset] {
+			background-color: #f44336;
+		}
+		input[type=submit]:hover, input[type=reset]:hover {
+			background-color: #45a049;
+		}
+		.container {
+			border-radius: 5px;
+			background-color: #f2f2f2;
+			padding: 20px;
+		}
+		.col-25 {
+			float: left;
+			width: 25%;
+			margin-top: 6px;
+		}
+		.col-75 {
+			float: left;
+			width: 75%;
+			margin-top: 6px;
+		}
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		@media screen and (max-width: 600px) {
+			form {
+				width: 100%;
+			}
+			.col-25, .col-75, input[type=submit], input[type=reset] {
+				width: 100%;
+				margin-top: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<form>
+    <h2>Customer Survey Form</h2>
+		<div class="row">
+			<div class="col-25">
+				<label for="fname">First Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="fname" name="firstname" placeholder="Your first name.." required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="lname">Last Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="dob">Date of Birth</label>
+			</div>
+			<div class="col-75">
+				<input type="date" id="dob" name="dob" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="country">Country</label>
+			</div>
+			<div class="col-75">
+				<select id="country" name="country" required>
+					<option value="">Select Country</option>
+					<option value="India">India</option>
+					<option value="USA">USA</option>
+					<option value="UK">UK</option>
+					<option value="Australia">Australia</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="gender">Gender</label>
+			</div>
+			<div class="col-75">
+				<input type="checkbox" id="male" name="gender" value="male">
+				<label for="male">Male</label>
+				<input type="checkbox" id="female" name="gender" value="female">
+				<label for="female">Female</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="profession">Profession</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="profession" name="profession" placeholder="Your profession.." required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="email">Email</label>
+			</div>
+			<div class="col-75">
+				<input type="email" id="email" name="email" placeholder="Your email.." required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="mobile">Mobile Number</label>
+			</div>
+			<div class="col-75">
+				<input type="tel" id="mobile" name="mobile" placeholder="Your mobile number.." required>
+			</div>
+		</div>
+		<div class="row">
+			<input type="submit" value="Submit">
+			<input type="reset" value="Reset">
+		</div>
+	</form>
+	<script>
+		const form = document.querySelector('form');
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const fname = document.getElementById('fname').value;
+			const lname = document.getElementById('lname').value;
+			const dob = document.getElementById('dob').value;
+			const country = document.getElementById('country').value;
+			const gender = document.querySelectorAll('input[name="gender"]:checked');
+			const profession = document.getElementById('profession').value;
+			const email = document.getElementById('email').value;
+			const mobile = document.getElementById('mobile').value;
+			if (fname && lname && dob && country && gender.length && profession && email && mobile) {
+				let genderValues = '';
+				gender.forEach((item) => {
+					genderValues += item.value + ' ';
+				});
+				const message = `First Name: ${fname}\nLast Name: ${lname}\nDate of Birth: ${dob}\nCountry: ${country}\nGender: ${genderValues}\nProfession: ${profession}\nEmail: ${email}\nMobile Number: ${mobile}`;
+				alert(message);
+				form.reset();
+			} else {
+				alert('Please fill all the fields');
+			}
+		});
+	</script>
+</body>
+</html>
+   
